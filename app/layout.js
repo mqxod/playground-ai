@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import Sidebar from "@/components/layout/Sidebar";
+import AppShell from "@/components/layout/AppShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +24,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex bg-black text-white overflow-x-hidden">
-        <Sidebar />
-        <div className="flex-1 ml-[90px] min-h-screen relative overflow-x-hidden">
-          {children}
-        </div>
+      <body className="min-h-full bg-black text-white overflow-x-hidden">
+        <ClerkProvider>
+          <AppShell>{children}</AppShell>
+        </ClerkProvider>
       </body>
     </html>
   );
