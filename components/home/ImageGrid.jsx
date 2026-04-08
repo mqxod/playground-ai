@@ -1,5 +1,5 @@
 import React from "react";
-import ImageCard from "./ImageCard";
+import ImageCard from "../ui/ImageCard";
 import { ChevronRight } from "lucide-react";
 
 const SAMPLE_IMAGES = [

@@ -1,13 +1,12 @@
-import Navbar from "@/components/Navbar";
-import PromptBox from "@/components/PromptBox";
-import ImageGrid from "@/components/ImageGrid";
-import VisualEffects from "@/components/VisualEffects";
-import TopAITools from "@/components/TopAITools";
-import Gallery from "@/components/Gallery";
-import AIImageGeneration from "@/components/AIImageGeneration";
-import Testimonials from "@/components/Testimonials";
-import Footer from "@/components/Footer";
-
+import Navbar from "@/components/layout/Navbar";
+import PromptBox from "@/components/home/PromptBox";
+import ImageGrid from "@/components/home/ImageGrid";
+import VisualEffects from "@/components/home/VisualEffects";
+import TopAITools from "@/components/home/TopAITools";
+import Gallery from "@/components/home/Gallery";
+import AIImageGeneration from "@/components/home/AIImageGeneration";
+import Testimonials from "@/components/home/Testimonials";
+import Footer from "@/components/layout/Footer";
 export default function Home() {
   return (
     <main className="relative min-h-screen pt-8 bg-[#0a0a0b]">
