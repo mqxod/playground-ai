@@ -34,8 +34,8 @@ export default function Sidebar() {
         <div className="flex flex-col w-full gap-1">
           <NavItem icon={Home} label="Home" href="/" />
           <NavItem icon={LayoutGrid} label="AI Tools" />
-          <NavItem icon={ImageIcon} label="Image Generation" />
-          <NavItem icon={Video} label="Video Generation" />
+          <NavItem icon={ImageIcon} label="Image Generation" href="/dashboard/generate" />
+          <NavItem icon={Video} label="Video Generation" href="/dashboard/video" />
         </div>
       </div>
 
