@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,15 +12,56 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Clerk Dark Mode Overrides ────────────────────────── */
+.cl-card,
+.cl-footer,
+.cl-footerAction,
+.cl-footerPages,
+.cl-footerPagesLink,
+.cl-internal-b6au3o,
+.cl-internal-1dauvt6 {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.cl-footerActionLink,
+.cl-footerActionText {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.cl-footerActionLink {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: underline !important;
+}
+
+/* Force any remaining white boxes to dark */
+[data-clerk-component] *,
+.cl-rootBox *,
+.cl-cardBox * {
+  --clerk-bg: transparent;
+}
+
+.cl-footer,
+.cl-footer * {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Clerk badge / branding */
+.cl-internal-1hp7nv0,
+.cl-badge,
+.cl-footerPages {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Override any box-shadow on clerk cards */
+.cl-card {
+  box-shadow: none !important;
 }

@@ -1,19 +1,20 @@
-// Temporarily disabled Clerk middleware for testing
-// import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// const clerkAuth = clerkMiddleware({
-//   signInUrl: "/login",
-//   signUpUrl: "/register",
-// });
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/login(.*)",
+  "/register(.*)",
+  "/sso-callback(.*)",
+  "/api/webhooks(.*)",
+]);
 
-// export default function proxy(request) {
-//   return clerkAuth(request);
-// }
-
-export default function proxy(request) {
-  return null; // No authentication for testing
-}
+export default clerkMiddleware(async (auth, request) => {
+  if (!isPublicRoute(request)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  // Only run the proxy on protected routes — skip auth pages entirely
+  matcher: ["/dashboard/:path*", "/api/:path*"],
 };

@@ -1,59 +1,133 @@
 "use client";
 
 import { SignIn } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+import Image from "next/image";
 
-const AUTH_IMAGE = "/login-images/login-signup.png";
+const AVATARS = [
+  { initials: "MK", from: "from-violet-500", to: "to-cyan-400" },
+  { initials: "AJ", from: "from-pink-500", to: "to-orange-400" },
+  { initials: "RS", from: "from-green-400", to: "to-cyan-500" },
+];
 
 export default function LoginScreen() {
   return (
-    <main className="min-h-screen bg-[#040404] text-white">
-      <div className="mx-auto flex min-h-screen max-w-7xl items-center px-6 py-10">
-        <div className="grid w-full gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-          <section className="rounded-[32px] border border-zinc-800 bg-zinc-950/95 p-10 shadow-[0_30px_120px_rgba(0,0,0,0.35)]">
-            <div className="max-w-xl">
-              <div className="mb-10 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-white/10 text-white shadow-lg shadow-white/5">
-                <span className="text-2xl">✨</span>
-              </div>
-              <h1 className="text-4xl font-semibold tracking-tight text-white">Welcome to Playground Art</h1>
-              <p className="mt-4 max-w-xl text-base text-zinc-400">
-                Sign in with Google or email to open your creative AI workspace.
-              </p>
+    <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
+      <div className="w-full max-w-[960px] grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.6)] border border-white/[0.07]">
+
+        {/* ── LEFT PANEL ─────────────────────────────────────── */}
+        <div className="bg-[#111111] flex flex-col justify-between p-10 min-h-[600px]">
+          <div>
+            {/* Logo */}
+            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-8">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
+              </svg>
             </div>
 
-            <div className="mt-10 rounded-[28px] border border-zinc-800 bg-black/80 p-6 shadow-inner shadow-white/5">
-              <SignIn
-                path="/login"
-                routing="path"
-                signUpUrl="/register"
-                afterSignInUrl="/dashboard/profile"
-              />
-            </div>
+            <h1 className="text-[26px] font-semibold text-white leading-tight tracking-tight mb-8">
+              Welcome to Playground Art
+            </h1>
 
-            <div className="mt-8 border-t border-zinc-800 pt-6 text-sm text-zinc-500">
-              By proceeding you agree to our <span className="text-white underline">Terms of use</span>. Read our <span className="text-white underline">Privacy Policy</span>.
-            </div>
-          </section>
+            {/* Clerk SignIn with Dark Theme */}
+            <SignIn
+              path="/login"
+              routing="path"
+              signUpUrl="/register"
+              afterSignInUrl="/dashboard"
+              appearance={{
+                baseTheme: dark,
+                elements: {
+                  rootBox: "w-full",
+                  cardBox: "w-full !shadow-none !bg-transparent",
+                  card: "w-full !bg-transparent !shadow-none !p-0",
+                  headerTitle: "hidden",
+                  headerSubtitle: "hidden",
+                  socialButtonsBlockButton:
+                    "!h-[46px] !rounded-xl !border !border-white/15 !bg-transparent !text-white !text-sm !font-medium hover:!bg-white/[0.06] !transition-all",
+                  socialButtonsBlockButtonText: "!text-white",
+                  dividerLine: "!bg-white/10",
+                  dividerText: "!text-white/30",
+                  formFieldLabel: "!text-white/60",
+                  formFieldInput:
+                    "!h-[46px] !rounded-xl !border !border-white/15 !bg-white/[0.04] !text-white placeholder:!text-white/30 focus:!border-white/40 focus:!bg-white/[0.07]",
+                  formButtonPrimary:
+                    "!h-[46px] !rounded-xl !bg-white/10 !border !border-white/15 !text-white !text-sm !font-semibold hover:!bg-white/20 !shadow-none",
+                  footerActionLink: "!text-white !underline !underline-offset-2",
+                  footerActionText: "!text-white/40",
+                  identityPreviewEditButton: "!text-white/50",
+                  formFieldAction: "!text-white/50 hover:!text-white/70",
+                  footer: "!bg-transparent !border-t !border-white/10",
+                  footerAction: "!bg-transparent",
+                  footerActionButton: "!text-white/40",
+                  internal: "!bg-transparent",
+                  button: "!text-white/60",
+                  badge: "!bg-transparent !text-white/30",
+                  alternativeMethodsBlockButton: "!bg-transparent !border !border-white/15 !text-white hover:!bg-white/[0.06]",
+                },
+                layout: {
+                  socialButtonsPlacement: "top",
+                  socialButtonsVariant: "blockButton",
+                },
+              }}
+            />
+          </div>
 
-          <aside className="relative overflow-hidden rounded-[32px] border border-zinc-800 bg-zinc-950/90">
-            <img src={AUTH_IMAGE} alt="AI art preview" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 rounded-[24px] border border-white/10 bg-black/70 p-6 backdrop-blur">
-              <p className="text-xs uppercase tracking-[0.3em] text-zinc-400">Login / SignUp</p>
-              <p className="mt-4 text-white text-lg font-semibold">
-                “Removed backgrounds from 200+ product shots in under 10 minutes. This tool is insane.”
-              </p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-cyan-400 text-sm font-bold text-black">
-                  JK
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">Jake K.</p>
-                  <p className="text-xs text-zinc-500">Content Creator</p>
-                </div>
-              </div>
-            </div>
-          </aside>
+          {/* Footer */}
+          <p className="text-[11px] text-white/20 mt-10 leading-relaxed">
+            By proceeding you agree to our{" "}
+            <span className="text-white/40 underline cursor-pointer">Terms of use</span>. Read our{" "}
+            <span className="text-white/40 underline cursor-pointer">Privacy Policy</span>.
+          </p>
         </div>
+
+        {/* ── RIGHT PANEL ────────────────────────────────────── */}
+        <div className="relative hidden lg:block overflow-hidden min-h-[600px]">
+          <Image
+            src="/login-images/login-signup.png"
+            alt="Neon AI artwork"
+            fill
+            sizes="50vw"
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+
+          <div className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="flex -space-x-2">
+                {AVATARS.map((a) => (
+                  <div
+                    key={a.initials}
+                    className={`w-7 h-7 rounded-full bg-gradient-to-br ${a.from} ${a.to} border-2 border-black flex items-center justify-center text-[9px] font-bold text-black`}
+                  >
+                    {a.initials}
+                  </div>
+                ))}
+              </div>
+              <span className="text-white/50 text-xs">200+ creators joined this month</span>
+            </div>
+
+            <p className="text-white text-sm font-medium leading-snug">
+              &ldquo;Removed backgrounds from 200+ product shots in under 10 minutes. This tool is insane.&rdquo;
+            </p>
+
+            <div className="mt-3 flex items-center justify-between">
+              <div>
+                <p className="text-white text-xs font-semibold">Jake K.</p>
+                <p className="text-white/40 text-[11px]">Content Creator</p>
+              </div>
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#facc15">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   );

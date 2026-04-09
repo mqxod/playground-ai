@@ -5,7 +5,7 @@ import Sidebar from "@/components/layout/Sidebar";
 
 export default function AppShell({ children }) {
   const pathname = usePathname();
-  const isAuthRoute = pathname?.startsWith("/login") || pathname?.startsWith("/register");
+  const isAuthRoute = pathname?.startsWith("/login") || pathname?.startsWith("/register") || pathname?.startsWith("/sso-callback");
 
   if (isAuthRoute) {
     return <div className="min-h-screen bg-black text-white">{children}</div>;
